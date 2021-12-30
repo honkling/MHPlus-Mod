@@ -96,7 +96,7 @@ public class SettingsManager {
 	}
 
 	public void hideNpcMessages(boolean value) {
-		hideAdvertisements = value;
+		hideNpcMessages = value;
 	}
 
 	public void hideMarketAdvertisements(boolean value) {
