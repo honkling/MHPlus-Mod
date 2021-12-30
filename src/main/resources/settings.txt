@@ -1,0 +1,3 @@
+hideAdvertisements=false
+hideNpcMessages=false
+hideMarketAdvertisements=false
