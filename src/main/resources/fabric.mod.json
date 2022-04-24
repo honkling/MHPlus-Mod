@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "minehutplus",
+  "id": "mhplus",
   "version": "${version}",
-  "name": "MinehutPlus",
+  "name": "MHPlus",
   "description": "A Fabric mod that improves your Minehut experience.",
   "authors": [
     "honkling"
@@ -12,15 +12,15 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "me.honkling.minehutplus.client.MinehutPlusClient"
+      "me.honkling.mhplus.MHPlusClient"
     ]
   },
   "mixins": [
-    "MinehutPlus.mixins.json"
+    "MHPlus.mixins.json"
   ],
   "depends": {
-    "java": ">=17",
+    "java": ">=16",
     "fabric": "*",
-    "minecraft": ">=1.18"
+    "minecraft": ">=1.17"
   }
 }

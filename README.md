@@ -1,2 +1,2 @@
-# MinehutPlus-Mod
-Minehut mod dedicated to improving the in-game Minehut experience
+# MHPlus-Mod
+Fabric mod dedicated to improving the in-game Minehut experience
