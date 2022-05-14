@@ -1,18 +1,11 @@
 package me.honkling.mhplus;
 
-import com.google.gson.Gson;
 import me.honkling.mhplus.commands.MHPlusCommand;
-import me.honkling.mhplus.mixins.ClickActionExtension;
 import me.honkling.mhplus.util.SettingsManager;
-import me.honkling.mhplus.util.StackManager;
-import me.honkling.mhplus.util.serializables.MessageObject;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.text.ClickEvent;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.Formatting;
@@ -27,17 +20,17 @@ import java.util.UUID;
 
 @Environment(EnvType.CLIENT)
 public class MHPlusClient implements ClientModInitializer {
+	private static boolean debug = true;
 	public static MHPlusClient Instance;
 	public static SettingsManager settings;
-
 	public static boolean isOnMinehut;
 	public static boolean isInLobby;
-	public static Logger logger = LogManager.getLogger();
+	public static Logger logger = LogManager.getLogger("MHPlus");
 	public static HashMap<String, UUID> uuidCache = new HashMap<>();
 
 	@Override
 	public void onInitializeClient() {
-		logger.info("[MHPlus] MHPlus is enabled.");
+		logger.info("MHPlus is enabled.");
 		Instance = this;
 		settings = SettingsManager.getInstance();
 		isOnMinehut = false;
@@ -51,24 +44,6 @@ public class MHPlusClient implements ClientModInitializer {
 			}
 		}, 0, 1000 * 60 * 30 /* 30 minutes */);
 
-		// Setup click event
-		new ClickActionExtension().run();
-
-		// Subscribe to stacks
-		StackManager.getInstance().subscribe("confirmSendMessage", (parameters) -> {
-			ClickEvent clickEvent = (ClickEvent) parameters[0];
-			String fullValue = clickEvent.getValue();
-			String value = fullValue.split("\s+")[1];
-
-			Gson gson = new Gson();
-			MessageObject message = gson.fromJson(value, MessageObject.class);
-
-			ClientPlayerEntity player = MinecraftClient.getInstance().player;
-			if (player == null)
-				return;
-			player.sendChatMessage(message.getMessage());
-		});
-
 		// register commands
 		MHPlusCommand.register(ClientCommandManager.DISPATCHER);
 	}
@@ -80,6 +55,8 @@ public class MHPlusClient implements ClientModInitializer {
 	}
 
 	public String getDataFolder() {
-		return new File("mods/MHPlus").getAbsolutePath();
+		File file = new File("mods/MHPlus");
+		if (!file.exists()) file.mkdir();
+		return file.getAbsolutePath();
 	}
 }

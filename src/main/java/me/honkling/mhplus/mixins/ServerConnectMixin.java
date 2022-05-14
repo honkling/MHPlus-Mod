@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ConnectScreen.class)
 public class ServerConnectMixin {
 	@Inject(at = @At("HEAD"), method = "connect(Lnet/minecraft/client/MinecraftClient;Lnet/minecraft/client/network/ServerAddress;)V")
-	private static void connect(MinecraftClient client, ServerAddress address, CallbackInfo ci) {
+	private void connect(MinecraftClient client, ServerAddress address, CallbackInfo ci) {
 		MHPlusClient.isOnMinehut = address.getAddress().matches("(.+\\.)?minehut\\.(com|gg)\\.?");
 		MHPlusClient.isInLobby = address.getAddress().matches("(.+\\.)?minehut\\.com\\.?");
 	}

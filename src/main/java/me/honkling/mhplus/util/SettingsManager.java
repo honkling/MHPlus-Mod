@@ -19,6 +19,9 @@ public class SettingsManager {
 	public static SettingsManager Instance;
 	public Settings settings;
 	public Data data;
+	public String message;
+
+	public boolean excuseMessage;
 
 	private SettingsManager() {
 		settings = new Settings();
@@ -36,7 +39,7 @@ public class SettingsManager {
 	public void write() {
 		File etcFile = new File(MHPlusClient.Instance.getDataFolder() + File.separator + "etc.bin");
 		try {
-			etcFile.delete();
+			if (etcFile.exists()) etcFile.delete();
 			etcFile.createNewFile();
 			final FileOutputStream writer = new FileOutputStream(etcFile, true);
 
@@ -44,7 +47,7 @@ public class SettingsManager {
 			int octal = 0;
 			int steps = 1;
 			Field[] fields = settings.getClass().getDeclaredFields();
-			for(Field field : fields) {
+			for (Field field : fields) {
 				if(field.getType() == SettingsManager.class) continue;
 				field.setAccessible(true);
 				try {
@@ -94,13 +97,14 @@ public class SettingsManager {
 		settings.setHideNpcMessages(false);
 		data.setJoinedServers(new ArrayList<>());
 		data.setBlockedUsers(new ArrayList<>());
-		if(etcFile.exists()) {
+		if (etcFile.exists()) {
 			try (FileInputStream stream = new FileInputStream(etcFile)) {
 				// Settings
 				String octalSettings = Integer.toBinaryString(stream.read());
-				octalSettings += "0".repeat(5 - octalSettings.length());
 				Field[] fields = settings.getClass().getDeclaredFields();
-				for(int i = 0; i < fields.length; i++) {
+				int settingsCount = Arrays.stream(fields).filter((field) -> field.getType() != SettingsManager.class).toArray().length;
+				octalSettings += "0".repeat(settingsCount - octalSettings.length());
+				for (int i = 0; i < fields.length; i++) {
 					Field field = fields[i];
 					if(field.getType() == SettingsManager.class) continue;
 					int value = Integer.parseInt(String.valueOf(octalSettings.charAt(i)));
@@ -111,7 +115,7 @@ public class SettingsManager {
 				// Blocked users
 				int blockedUsersSize = stream.read();
 				List<String> blockedUsers = new ArrayList<>(blockedUsersSize);
-				for(int i = 0; i < blockedUsersSize; i++) {
+				for (int i = 0; i < blockedUsersSize; i++) {
 					byte[] uuid = new byte[32];
 					stream.read(uuid);
 					blockedUsers.add(new String(uuid));
@@ -121,7 +125,7 @@ public class SettingsManager {
 				// Joined servers
 				int joinedServersSize = stream.read();
 				List<Data.Server> servers = new ArrayList<>(joinedServersSize);
-				for(int i = 0; i < joinedServersSize; i++) {
+				for (int i = 0; i < joinedServersSize; i++) {
 					byte[] rawId = new byte[24];
 					stream.read(rawId);
 					String id = new String(rawId);

@@ -5,10 +5,10 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "ChatHudListenerMixin",
-    "ChatMessageMixin",
     "ServerConnectMixin",
     "MinecraftClientMixin",
-    "ParticleLimiterMixin"
+    "ParticleLimiterMixin",
+    "ClientPlayerEntityMixin"
   ],
   "client": [
   ],
