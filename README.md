@@ -4,8 +4,6 @@
     </a>
 </p>
 
-Note: MH+ is no longer maintained by me. Feel free to fork.
-
 # MHPlus-Mod
 A Fabric mod to improve the in-game Minehut experience.
 
