@@ -4,13 +4,13 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import me.honkling.mhplus.MHPlusClient;
 import me.honkling.mhplus.util.SettingsManager;
-import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
+import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 
 import java.util.List;
 
-import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
 public class HistoryCommand {
 
@@ -22,14 +22,14 @@ public class HistoryCommand {
 
     public static int execute(CommandContext<FabricClientCommandSource> context) {
         List<SettingsManager.Data.Server> serverList = SettingsManager.Instance.data.getJoinedServers();
-        MutableText text = new LiteralText("Viewing past servers.")
+        MutableText text = Text.literal("Viewing past servers.")
                 .formatted(Formatting.GRAY);
 
         context.getSource().getPlayer().sendMessage(MHPlusClient.prefix(text), false);
 
-        MutableText servers = new LiteralText("Here's 30 previously joined servers.\n")
+        MutableText servers = Text.literal("Here's 30 previously joined servers.\n")
                 .formatted(Formatting.GRAY)
-                .append(MHPlusClient.prefix(new LiteralText("")));
+                .append(MHPlusClient.prefix(Text.literal("")));
 
         int iterations = 0;
 
@@ -38,19 +38,19 @@ public class HistoryCommand {
         for(SettingsManager.Data.Server server : serverList.toArray(new SettingsManager.Data.Server[0])) {
             if(iterations > 30) break;
             servers.append(
-                            new LiteralText(iterations > 0 ? ", " : "")
+                            Text.literal(iterations > 0 ? ", " : "")
                                     .formatted(Formatting.GRAY)
                     )
                     .append(
-                            new LiteralText(server.getName())
+                            Text.literal(server.getName())
                                     .setStyle(
                                             Style.EMPTY
                                                     .withColor(Formatting.WHITE)
                                                     .withHoverEvent(
-                                                            new HoverEvent(HoverEvent.Action.SHOW_TEXT, new LiteralText("Click to join ")
+                                                            new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal("Click to join ")
                                                                     .formatted(Formatting.GRAY)
                                                                     .append(
-                                                                            new LiteralText(server.getName())
+                                                                            Text.literal(server.getName())
                                                                                     .formatted(Formatting.WHITE)
                                                                     ))
                                                     )

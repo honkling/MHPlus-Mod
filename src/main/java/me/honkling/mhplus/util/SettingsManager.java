@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import me.honkling.mhplus.MHPlusClient;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
-
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URI;
@@ -150,11 +149,11 @@ public class SettingsManager {
 	}
 
 	public MutableText formatSetting(String key, boolean value) {
-		 MutableText text = new LiteralText("\n" + key).formatted(Formatting.WHITE);
-		 MutableText hover = new LiteralText(key + "\n\nValue: ")
+		 MutableText text = Text.literal("\n" + key).formatted(Formatting.WHITE);
+		 MutableText hover = Text.literal(key + "\n\nValue: ")
 				 .formatted(Formatting.GRAY)
 				 .append(
-				 		new LiteralText(String.valueOf(value))
+				 		Text.literal(String.valueOf(value))
 							    .formatted(Formatting.WHITE)
 				 );
 		 text = text.setStyle(
