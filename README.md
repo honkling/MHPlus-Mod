@@ -17,7 +17,8 @@ A Fabric mod to improve the in-game Minehut experience.
 4. Drag the downloaded jar into your `mods` folder.
 
 # How to Use
-Run the `/mhplus` command to view your settings. You can hover over a setting to view its current value, and click on the settings to change its value. You can view recently joined servers with `/mhplus history`, and block/unblock people with `/mhplus block <player name>`.
+Run the `/mhplus` command to view your settings. You can hover over a setting to view its current value, and click on the settings to change their value. 
+You can view recently joined servers with `/mhplus history`
 
 
 ## License

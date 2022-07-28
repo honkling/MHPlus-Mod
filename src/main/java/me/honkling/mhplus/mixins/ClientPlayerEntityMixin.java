@@ -5,9 +5,9 @@ import me.honkling.mhplus.util.SettingsManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.ClickEvent;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,9 +30,9 @@ public class ClientPlayerEntityMixin {
 			Style style = Style.EMPTY
 					.withFormatting(Formatting.WHITE, Formatting.UNDERLINE)
 					.withClickEvent(clickEvent);
-			MutableText text = new LiteralText("MH+ has cancelled that message because of a potential typo that could get you muted. ")
+			MutableText text = Text.literal("MH+ has cancelled that message because of a potential typo that could get you muted. ")
 					.formatted(Formatting.GRAY)
-					.append(new LiteralText(
+					.append(Text.literal(
 							"Send the message?"
 					).setStyle(style));
 

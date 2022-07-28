@@ -5,14 +5,14 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import me.honkling.mhplus.MHPlusClient;
 import me.honkling.mhplus.util.SettingsManager;
-import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
+import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.argument;
-import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
 public class SettingCommand {
     private static final String name = "setting";
@@ -53,17 +53,17 @@ public class SettingCommand {
                 settings.setProtectAdvertisementTypos(newValue);
             }
             default -> {
-                MutableText error = new LiteralText("Invalid setting provided.")
+                MutableText error = Text.literal("Invalid setting provided.")
                         .formatted(Formatting.GRAY);
                 client.sendMessage(MHPlusClient.prefix(error), false);
                 return 1;
             }
         }
 
-        MutableText text = new LiteralText(setting)
+        MutableText text = Text.literal(setting)
                 .formatted(Formatting.WHITE)
                 .append(
-                        new LiteralText(String.format(" has been %s.", newValue ? "enabled" : "disabled"))
+                        Text.literal(String.format(" has been %s.", newValue ? "enabled" : "disabled"))
                                 .formatted(Formatting.GRAY)
                 );
 

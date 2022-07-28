@@ -2,9 +2,9 @@ package me.honkling.mhplus.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import me.honkling.mhplus.commands.impl.*;
-import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
+import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 
-import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
 public class MHPlusCommand {
 	public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
@@ -12,7 +12,6 @@ public class MHPlusCommand {
 				.then(SettingCommand.register())
 				.then(SendMessageCommand.register())
 				.then(HistoryCommand.register())
-				.then(BlockCommand.register())
 				.executes(DefaultCommand::execute)
 		);
 	}

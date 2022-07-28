@@ -5,14 +5,14 @@ import me.honkling.mhplus.MHPlusClient;
 import me.honkling.mhplus.util.SettingsManager;
 import me.honkling.mhplus.util.serializables.MojangResponse;
 import net.minecraft.client.gui.hud.ChatHudListener;
-import net.minecraft.network.MessageType;
+import net.minecraft.network.message.MessageType;
+import net.minecraft.network.message.MessageSender;
 import net.minecraft.text.Text;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -27,10 +27,7 @@ import java.util.regex.Pattern;
 @Mixin(ChatHudListener.class)
 public class ChatHudListenerMixin {
 	@Inject(at = @At("HEAD"), method = "onChatMessage", cancellable = true)
-	public void onChatMessage(MessageType messageType, Text message, UUID sender, CallbackInfo ci) {
-		if (SettingsManager.Instance.data.getBlockedUsers().contains(sender.toString()))
-			ci.cancel();
-
+	public void onChatMessage(MessageType messageType, Text message, MessageSender sender, CallbackInfo ci) {
 		if (MHPlusClient.isOnMinehut) {
 			String msg = message.getString().replaceAll("([§�].)", "").trim().toLowerCase();
 			SettingsManager.Settings settings = SettingsManager.Instance.settings;
