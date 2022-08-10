@@ -1,0 +1,15 @@
+{
+  "settings.screen.title": "MH+ Settings",
+  "settings.hideAdvertisements.name": "Hide advertisements",
+  "settings.hideAdvertisements.description": "Hides /ad and /mad messages from your chat.",
+  "settings.hideNpcMessages.name": "Hide NPC messages",
+  "settings.hideNpcMessages.description": "Hides messages from NPCs in the lobby.",
+  "settings.hideMinehutBroadcasts.name": "Hide Minehut broadcasts",
+  "settings.hideMinehutBroadcasts.description": "Hide broadcasts sent from Minehut.",
+  "settings.protectAdvertisementTypos.name": "Protect from typos",
+  "settings.protectAdvertisementTypos.description": "Protects you from accidentally advertising as result of a typo.",
+  "settings.key.name": "Open Settings",
+  "settings.category.name": "MH+",
+  "messages.protectedFromAdvertisement.title": "Message Cancelled",
+  "messages.protectedFromAdvertisement.description": "Press K to send it."
+}

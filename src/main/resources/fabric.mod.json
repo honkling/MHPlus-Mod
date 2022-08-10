@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "mhplus",
+  "version": "${version}",
+
+  "name": "MH+",
+  "description": "Improve the feel of Minehut.",
+  "authors": [
+    "honkling"
+  ],
+  "contact": {
+    "sources": "https://github.com/honkling/MHPlus-Mod"
+  },
+
+  "license": "CC0-1.0",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "me.honkling.mhplus.MHPlus"
+    ]
+  },
+  "mixins": [
+    "mhplus.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.8.7",
+    "fabric": "*",
+    "fabric-language-kotlin": "*",
+    "minecraft": ">=1.17"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
